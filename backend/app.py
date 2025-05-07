@@ -11,7 +11,8 @@ def predict():
         data = request.get_json()
         message = data.get("text", "")
         is_toxic = predict_toxicity(message)
-        return jsonify({"toxic": is_toxic})
+        data={"toxic": is_toxic, "reason": "AI detected profanity/offensive language in this message"}
+        return jsonify(data)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
